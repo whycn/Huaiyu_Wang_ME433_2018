@@ -54,11 +54,18 @@ int main() {
     DDPCONbits.JTAGEN = 0;
 
     // do your TRIS and LAT commands here
-
+    TRISAbits.TRISA4 = 0;   // set LED an output pin
+    LATAbits.LATA4 = 1;     // initialize LED high
+    TRISBbits.TRISB4 = 1;   // set push button an input pin
+    
     __builtin_enable_interrupts();
-
+    _CP0_SET_COUNT(0);
     while(1) {
-	// use _CP0_SET_COUNT(0) and _CP0_GET_COUNT() to test the PIC timing
-	// remember the core timer runs at half the sysclk
+        // use _CP0_SET_COUNT(0) and _CP0_GET_COUNT() to test the PIC timing
+            // remember the core timer runs at half the sysclk
+        while(_CP0_GET_COUNT() < 12000){;}  // 24MHz/1kHz = 24000
+        LATAINV = 0x10;     // turn off/on LED
+        _CP0_SET_COUNT(0);  // Reset the timer
+        while(!PORTBbits.RB4){;} // if button is pushed, stop and wait
     }
 }
