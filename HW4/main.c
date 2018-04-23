@@ -51,13 +51,21 @@ int main() {
             // remember the core timer runs at half the sysclk
         for(i=0;i<200;i++){
             _CP0_SET_COUNT(0);  // Reset the timer
-            setVoltage(CHANNELA,510+510*sin((float)i*0.02*PI));
+            setVoltage(CHANNELA,i/*510.5+257*sin((float)i*0.02*PI)*/);
             if(i<100)
                 setVoltage(CHANNELB,10*(float)i);
             else
                 setVoltage(CHANNELB,1000-10*((float)i-100));
             while(_CP0_GET_COUNT() < 12000){;}  // 24MHz/1kHz = 24000
         }
+        
+//        for(i=0;i<200;i++){
+//            _CP0_SET_COUNT(0);  // Reset the timer
+//            setVoltage(CHANNELB,510+510*sin((float)i*0.02*PI));
+//
+//            while(_CP0_GET_COUNT() < 12000){;}  // 24MHz/1kHz = 24000
+//        }
+        
 //        LATAINV = 0x10;     // turn off/on LED
  //       while(!PORTBbits.RB4){;} // if button is pushed, stop and wait
     }
