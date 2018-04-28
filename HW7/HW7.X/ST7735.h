@@ -7,6 +7,7 @@
 
 #define BACKGROUND 0x0000
 #define BARLENGTH 100
+#define CROSSLENGTH 64
 
 // lookup table for all of the ascii characters
 static const char ASCII[96][5] = {
@@ -180,6 +181,7 @@ void LCD_clearScreen(unsigned short); // set the color of every pixel
 void LCD_drawCharacter(unsigned short x, unsigned short y, char ch, unsigned short color);
 void LCD_drawString(unsigned short x, unsigned short y, char ch[], unsigned short color);
 void LCD_drawBar(unsigned short x, unsigned short y, char length, unsigned short color);
+void LCD_drawGravCross(float, float, unsigned short);
 
 
 

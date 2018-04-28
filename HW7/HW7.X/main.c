@@ -1,8 +1,10 @@
 #include <xc.h>
-#include <stdio.h>   // to use sprintf()
+#include <sys/attribs.h>  // __ISR macro
+#include <stdio.h>
+#include "i2c_master_noint.h"
 #include "ST7735.h"
+#include "LSM6DS333.h"
 
-#define CS LATBbits.LATB7  // SPI chip select pin
 #define STRINGLENGTH 100
 
 
@@ -41,15 +43,17 @@
 #pragma config FUSBIDIO = ON // USB pins controlled by USB module
 #pragma config FVBUSONIO = ON // USB BUSON controlled by USB module
 
+
+
 int main() {
+    unsigned char dataReg8[STRINGLENGTH]={};
+    // short dataReg16[STRINGLENGTH];
+    char str1[STRINGLENGTH];
+    int i;
+    float Gx,Gy;
     
-  char str1[STRINGLENGTH],str2[STRINGLENGTH];
-  int timer=10;
-  float FPS=0.0;
-  // some initialization function to set the right speed setting
-  __builtin_disable_interrupts();
-  
-  // set the CP0 CONFIG register to indicate that kseg0 is cacheable (0x3)
+    __builtin_disable_interrupts();
+      // set the CP0 CONFIG register to indicate that kseg0 is cacheable (0x3)
     __builtin_mtc0(_CP0_CONFIG, _CP0_CONFIG_SELECT, 0xa4210583);
 
     // 0 data RAM access wait states
@@ -61,27 +65,36 @@ int main() {
     // disable JTAG to get pins back
     DDPCONbits.JTAGEN = 0;
 
-    // do your TRIS and LAT commands here
-    TRISAbits.TRISA4 = 0;   // set LED an output pin
-    LATAbits.LATA4 = 1;     // initialize LED high
-    TRISBbits.TRISB4 = 1;   // set push button an input pin
-  SPI1_init();
-  LCD_init();
-  LCD_clearScreen(BACKGROUND);
+    TRISAbits.TRISA4 = 0; // set LED an output pin
+    TRISBbits.TRISB4 = 1; // set push button an input pin
+    LATAbits.LATA4 = 1; // turn LED off
+    LSM6DS333_init();
+    SPI1_init();
+    LCD_init();
+    LCD_clearScreen(BACKGROUND);
 
-  __builtin_enable_interrupts();
-  while(1) {
-      for (timer=0;timer<=100;timer++){
-            _CP0_SET_COUNT(0);
-            sprintf(str1,"Hello World %d!  ",timer);
-            LCD_drawString(28,32,str1,CYAN); //String
-            LCD_drawBar(16,50,timer,RED);    //Bar
-            FPS = 24000000/_CP0_GET_COUNT(); //FPS
-            sprintf(str2,"FPS: %1.2f",FPS);
-            LCD_drawString(28,80,str2,YELLOW);
-            while(_CP0_GET_COUNT() < 2400000){;} // 24MHz/5Hz = 4800000
-      }
-      //LCD_clearScreen(BACKGROUND);
-  }
-  return 0;
+    __builtin_enable_interrupts();
+
+    while(1) {
+        _CP0_SET_COUNT(0);
+        while (_CP0_GET_COUNT()<2400000) {;}
+//        I2C_read_multiple(IMU_ADDR, 0x20, dataReg8, 14);
+//        Gx = getxXL(dataReg8);
+//        Gy = getyXL(dataReg8);
+//        
+//        sprintf(str1,"Gx = %1.3f!",Gx);
+//        LCD_drawString(10,10,str1,BLUE); //String
+//        sprintf(str1,"Gy = %1.3f!",Gy);
+//        LCD_drawString(10,20,str1,BLUE); //String
+        
+        
+        I2C_read_multiple(IMU_ADDR, 0x0f, dataReg8, 10);
+        sprintf(str1,"Gy = %x!",dataReg8[0]);
+        LCD_drawString(10,20,str1,BLUE); //String
+        sprintf(str1,"Gy = %x!",dataReg8[1]);
+        LCD_drawString(10,40,str1,BLUE); //String
+        
+        //LCD_drawGravCross(Gx,Gy,WHITE);
+    }
+    return 0;
 }
