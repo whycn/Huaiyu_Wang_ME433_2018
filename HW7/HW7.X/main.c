@@ -1,5 +1,4 @@
 #include <xc.h>
-#include <sys/attribs.h>  // __ISR macro
 #include <stdio.h>
 #include "i2c_master_noint.h"
 #include "ST7735.h"
@@ -43,6 +42,21 @@
 #pragma config FUSBIDIO = ON // USB pins controlled by USB module
 #pragma config FVBUSONIO = ON // USB BUSON controlled by USB module
 
+unsigned char imu_test(void) {
+  // get the data from WHO_AM_I register
+  unsigned char whoami;
+  i2c_master_start();                   // start
+  i2c_master_send(IMU_ADDR << 1);   // OP + W: R/W = 1 write
+  i2c_master_send(0x0F);                // ADDR: WHO_AM_I register for imu
+
+  i2c_master_restart();                 // restart
+  i2c_master_send(IMU_ADDR << 1 | 1);   // OP + W: R/W = 1 read
+  whoami = i2c_master_recv();           // CTRL1_XL register: defalut [0 1 1 0 1 0 0 1]
+  i2c_master_ack(1);
+  i2c_master_stop();
+  return whoami;
+}
+
 
 
 int main() {
@@ -53,23 +67,12 @@ int main() {
     float Gx,Gy;
     
     __builtin_disable_interrupts();
-      // set the CP0 CONFIG register to indicate that kseg0 is cacheable (0x3)
-    __builtin_mtc0(_CP0_CONFIG, _CP0_CONFIG_SELECT, 0xa4210583);
-
-    // 0 data RAM access wait states
-    BMXCONbits.BMXWSDRM = 0x0;
-
-    // enable multi vector interrupts
-    INTCONbits.MVEC = 0x1;
-
-    // disable JTAG to get pins back
-    DDPCONbits.JTAGEN = 0;
-
+    
+    
     TRISAbits.TRISA4 = 0; // set LED an output pin
     TRISBbits.TRISB4 = 1; // set push button an input pin
     LATAbits.LATA4 = 1; // turn LED off
     LSM6DS333_init();
-    SPI1_init();
     LCD_init();
     LCD_clearScreen(BACKGROUND);
 
@@ -77,24 +80,24 @@ int main() {
 
     while(1) {
         _CP0_SET_COUNT(0);
-        while (_CP0_GET_COUNT()<2400000) {;}
-//        I2C_read_multiple(IMU_ADDR, 0x20, dataReg8, 14);
-//        Gx = getxXL(dataReg8);
-//        Gy = getyXL(dataReg8);
-//        
-//        sprintf(str1,"Gx = %1.3f!",Gx);
-//        LCD_drawString(10,10,str1,BLUE); //String
-//        sprintf(str1,"Gy = %1.3f!",Gy);
-//        LCD_drawString(10,20,str1,BLUE); //String
-        
-        
-        I2C_read_multiple(IMU_ADDR, 0x0f, dataReg8, 10);
-        sprintf(str1,"Gy = %x!",dataReg8[0]);
+        I2C_read_multiple(IMU_ADDR, 0x20, dataReg8, 14);
+        Gx = getxXL(dataReg8);
+        Gy = getyXL(dataReg8);    
+        sprintf(str1,"Gx = %1.3f!",Gx);
+        LCD_drawString(10,10,str1,BLUE); //String
+        sprintf(str1,"Gy = %1.3f!",Gy);
         LCD_drawString(10,20,str1,BLUE); //String
-        sprintf(str1,"Gy = %x!",dataReg8[1]);
-        LCD_drawString(10,40,str1,BLUE); //String
+        LCD_drawGravCross(Gx,Gy,WHITE);
         
-        //LCD_drawGravCross(Gx,Gy,WHITE);
+        
+//       unsigned char status = imu_test();
+//       sprintf(str1, "Test address: %x  ", status);
+//       LCD_drawString(10, 65, str1, WHITE);
+//        
+
+        
+        while (_CP0_GET_COUNT()<1200000) {;}
+        LATAbits.LATA4=!LATAbits.LATA4;
     }
     return 0;
 }

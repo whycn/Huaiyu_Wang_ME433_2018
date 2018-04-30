@@ -296,76 +296,76 @@ void LCD_drawGravCross(float Gx, float Gy, unsigned short color){
     if (Gx>0){
         for (i=0;i<xlength;i++){
             for(j=0;j<2;j++){
-                LCD_drawPixel(64+i,64+j,color);
+                LCD_drawPixel(64+i,80+j,color);
             }
         }
         if (xlength < CROSSLENGTH){
             for (i=xlength;i<CROSSLENGTH;i++){
                 for(j=0;j<2;j++){
-                    LCD_drawPixel(64+i,64+j,BACKGROUND);
+                    LCD_drawPixel(64+i,80+j,BACKGROUND);
                 }
             }
         }
         for (i=1;i<CROSSLENGTH;i++){
             for(j=0;j<2;j++){
-                LCD_drawPixel(64-i,64+j,BACKGROUND);
+                LCD_drawPixel(64-i,80+j,BACKGROUND);
             }
         }    
     }
     else{
         for (i=0;i<xlength;i++){
             for(j=0;j<2;j++){
-                LCD_drawPixel(64-i,64+j,color);
+                LCD_drawPixel(64-i,80+j,color);
             }
         }
         if (xlength < CROSSLENGTH){
             for (i=xlength;i<CROSSLENGTH;i++){
                 for(j=0;j<2;j++){
-                    LCD_drawPixel(64-i,64+j,BACKGROUND);
+                    LCD_drawPixel(64-i,80+j,BACKGROUND);
                 }
             }
         }
         for (i=1;i<CROSSLENGTH;i++){
             for(j=0;j<2;j++){
-                LCD_drawPixel(64+i,64+j,BACKGROUND);
+                LCD_drawPixel(64+i,80+j,BACKGROUND);
             }
         } 
     }
     if (Gy>0){
         for (i=0;i<ylength;i++){
             for(j=0;j<2;j++){
-                LCD_drawPixel(64+j,64+i,color);
+                LCD_drawPixel(64+j,80+i,color);
             }
         }
         if (ylength < CROSSLENGTH){
             for (i=ylength;i<CROSSLENGTH;i++){
                 for(j=0;j<2;j++){
-                    LCD_drawPixel(64+j,64+i,BACKGROUND);
+                    LCD_drawPixel(64+j,80+i,BACKGROUND);
                 }
             }
         }
         for (i=1;i<CROSSLENGTH;i++){
             for(j=0;j<2;j++){
-                LCD_drawPixel(64+j,64-i,BACKGROUND);
+                LCD_drawPixel(64+j,80-i,BACKGROUND);
             }
         }
     }
     else{
         for (i=0;i<ylength;i++){
             for(j=0;j<2;j++){
-                LCD_drawPixel(64+j,64-i,color);
+                LCD_drawPixel(64+j,80-i,color);
             }
         }
         if (ylength < CROSSLENGTH){
             for (i=ylength;i<CROSSLENGTH;i++){
                 for(j=0;j<2;j++){
-                    LCD_drawPixel(64+j,64-i,BACKGROUND);
+                    LCD_drawPixel(64+j,80-i,BACKGROUND);
                 }
             }
         }
         for (i=1;i<CROSSLENGTH;i++){
             for(j=0;j<2;j++){
-                LCD_drawPixel(64+j,64+i,BACKGROUND);
+                LCD_drawPixel(64+j,80+i,BACKGROUND);
             }
         }
     }

@@ -2,33 +2,34 @@
 #include "LSM6DS333.h"
 
 //initialize I/O expander
-void LSM6DS333_init(){
-    ANSELBbits.ANSB2 = 0;
-    ANSELBbits.ANSB3 = 0;
-    i2c_master_setup();
-    
-    // Initialize accelerometer
-    i2c_master_start();
-    i2c_master_send(IMU_ADDR<<1);   // R/W = 0 = write
-    i2c_master_send(0x10);  // 0x10 = CTRL1_XL
-    i2c_master_send(0x82);  // ODR_XL = 0b1000 (1.66kHz)
-                            // FS_XL = 0b00 (2g), BW_XL = 0b10 (100Hz)
-    i2c_master_stop();
-    
-    // Initialize gyroscope
-    i2c_master_start();
-    i2c_master_send(IMU_ADDR<<1);   // R/W = 0 = write
-    i2c_master_send(0x11);  // 0x11 = CTRL2_G
-    i2c_master_send(0x88);  // ODR_G = 0b1000 (1.66kHz), FS_G = 0b10 (1000dps)
-                            // FS_125 = 0 (disabled), bit 0 = 0 (must set 0)
-    i2c_master_stop();
-    
-    // Initialize 
-    i2c_master_start();
-    i2c_master_send(IMU_ADDR<<1);   // R/W = 0 = write
-    i2c_master_send(0x12);  // 0x12 = CTRL3_C
-    i2c_master_send(0x04);  // default = 0x04, IF_INC = 1(default)
-    i2c_master_stop();
+void LSM6DS333_init(void) {
+  // Turn off analog input (since for i2c we still use the i2c2)
+  ANSELBbits.ANSB2 = 0;
+  ANSELBbits.ANSB3 = 0;
+
+  // Initialize the i2c
+  i2c_master_setup();
+
+  // Initialize the accelerometer
+  i2c_master_start();                   // start
+  i2c_master_send(IMU_ADDR << 1);       // OP + W: R/W = 0 = write
+  i2c_master_send(0x10);                // ADDR: CTRL1_XL register for imu accelerometer
+  i2c_master_send(0x82);                // CTRL1_XL register: [1 0 0 0 0 0 1 0], ORD_XL = [1 0 0 0] (1.66kHz), FS_XL = [0 0] (4g), BW_XL = [1 0] (100Hz filter)
+  i2c_master_stop();
+
+  // Initialize gyroscope
+  i2c_master_start();                   // start
+  i2c_master_send(IMU_ADDR << 1);       // OP + W: R/W = 0 = write
+  i2c_master_send(0x11);                // ADDR: CTRL2_G register for imu gyroscope
+  i2c_master_send(0x88);                // CT RL2_G register: [1 0 0 0 1 0 0 0], ORD_G = [1 0 0 0] (1.66kHz), FS_G = [1 0] (1000dps), BW_XL = [0 0] (no filter)
+  i2c_master_stop();
+
+  // Initialize IF_INC bit (read multiple registers without specifying each register location)
+  i2c_master_start();                   // start
+  i2c_master_send(IMU_ADDR << 1);       // OP + W: R/W = 0 = write
+  i2c_master_send(0x12);                // ADDR: CTRL3_C register for reading multiple registers
+  i2c_master_send(0x04);                // CTRL3_C register: default value [0 0 0 0 0 1 0 0] where IF_INC = 1
+  i2c_master_stop();
 }
 
 void I2C_read_multiple(unsigned char address, unsigned char regis, unsigned char * data, int length){

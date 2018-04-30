@@ -21,17 +21,17 @@ PATH:=E:/software/MAPLAB IDE/mplab_ide/platform/../mplab_ide/modules/../../bin/:
 # Path to java used to run MPLAB X when this makefile was created
 MP_JAVA_PATH="E:\software\MAPLAB IDE\sys\java\jre1.8.0_144/bin/"
 OS_CURRENT="$(shell uname -s)"
-MP_CC="E:\software\MAPLAB IDE\bin\xc32-gcc.exe"
-MP_CPPC="E:\software\MAPLAB IDE\bin\xc32-g++.exe"
+MP_CC="E:\software\PIC32\bin\xc32-gcc.exe"
+MP_CPPC="E:\software\PIC32\bin\xc32-g++.exe"
 # MP_BC is not defined
-MP_AS="E:\software\MAPLAB IDE\bin\xc32-as.exe"
-MP_LD="E:\software\MAPLAB IDE\bin\xc32-ld.exe"
-MP_AR="E:\software\MAPLAB IDE\bin\xc32-ar.exe"
+MP_AS="E:\software\PIC32\bin\xc32-as.exe"
+MP_LD="E:\software\PIC32\bin\xc32-ld.exe"
+MP_AR="E:\software\PIC32\bin\xc32-ar.exe"
 DEP_GEN=${MP_JAVA_PATH}java -jar "E:/software/MAPLAB IDE/mplab_ide/platform/../mplab_ide/modules/../../bin/extractobjectdependencies.jar"
-MP_CC_DIR="E:\software\MAPLAB IDE\bin"
-MP_CPPC_DIR="E:\software\MAPLAB IDE\bin"
+MP_CC_DIR="E:\software\PIC32\bin"
+MP_CPPC_DIR="E:\software\PIC32\bin"
 # MP_BC_DIR is not defined
-MP_AS_DIR="E:\software\MAPLAB IDE\bin"
-MP_LD_DIR="E:\software\MAPLAB IDE\bin"
-MP_AR_DIR="E:\software\MAPLAB IDE\bin"
+MP_AS_DIR="E:\software\PIC32\bin"
+MP_LD_DIR="E:\software\PIC32\bin"
+MP_AR_DIR="E:\software\PIC32\bin"
 # MP_BC_DIR is not defined
