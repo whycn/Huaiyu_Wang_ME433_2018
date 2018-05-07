@@ -1,8 +1,26 @@
 build/default/production/_ext/1688732426/system_exceptions.o:  \
  ../src/system_config/default/system_exceptions.c  \
+ E:/software/MAPLAB\ IDE/pic32mx/include/xc.h  \
+ E:/software/MAPLAB\ IDE/pic32mx/include/xc-pic32m.h  \
+ E:/software/MAPLAB\ IDE/pic32mx/include/proc/p32mx250f128b.h  \
+ E:/software/MAPLAB\ IDE/pic32mx/include/stdint.h  \
+ E:/software/MAPLAB\ IDE/pic32mx/include/machine/int_types.h  \
+ E:/software/MAPLAB\ IDE/pic32mx/include/machine/int_mwgwtypes.h  \
+ E:/software/MAPLAB\ IDE/pic32mx/include/machine/int_limits.h  \
+ E:/software/MAPLAB\ IDE/pic32mx/include/machine/int_const.h  \
+ E:/software/MAPLAB\ IDE/pic32mx/include/proc/ppic32mx.h  \
+ E:/software/MAPLAB\ IDE/pic32mx/include/cp0defs.h  \
+ E:/software/MAPLAB\ IDE/pic32mx/include/sys/appio.h  \
+ E:/software/MAPLAB\ IDE/pic32mx/include/sys/l1cache.h  \
+ E:/software/MAPLAB\ IDE/pic32mx/include/stdlib.h  \
+ E:/software/MAPLAB\ IDE/pic32mx/include/stddef.h  \
  ../src/system_config/default/system_config.h  \
  ../src/system_config/default/system_definitions.h  \
+ E:/software/MAPLAB\ IDE/pic32mx/include/stdbool.h  \
  ../../../../../software/MPLAB\ Harmony/framework/system/common/sys_common.h  \
+ E:/software/MAPLAB\ IDE/pic32mx/include/string.h  \
+ E:/software/MAPLAB\ IDE/pic32mx/include/assert.h  \
+ E:/software/MAPLAB\ IDE/pic32mx/include/sys/attribs.h  \
  ../../../../../software/MPLAB\ Harmony/framework/system/common/sys_module.h  \
  ../../../../../software/MPLAB\ Harmony/framework/system/devcon/sys_devcon.h  \
  ../../../../../software/MPLAB\ Harmony/framework/system/system.h  \
@@ -119,7 +137,9 @@ build/default/production/_ext/1688732426/system_exceptions.o:  \
  ../../../../../software/MPLAB\ Harmony/framework/peripheral/ports/processor/../templates/ports_ChangeNoticeEdgeStatus_Unsupported.h  \
  ../../../../../software/MPLAB\ Harmony/framework/peripheral/ports/plib_ports_compatibility.h  \
  ../src/app.h  \
-../src/system_config/default/system_definitions.h  \
+E:/software/MAPLAB\ IDE/pic32mx/include/stdio.h  \
+ E:/software/MAPLAB\ IDE/pic32mx/include/stdarg.h  \
+ ../src/system_config/default/system_definitions.h  \
  ../src/i2c_master_noint.h  \
 ../src/ST7735.h  \
 ../src/LSM6DS333.h  \
