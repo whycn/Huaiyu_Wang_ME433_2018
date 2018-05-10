@@ -412,7 +412,43 @@ void APP_Tasks(void) {
             AND REMEMBER THE NUMBER OF CHARACTERS IN len */
 
             I2C_read_multiple(IMU_ADDR, 0x20, dataReg8, DATA_LEN);
-            RAW = getZAcc(dataReg8);
+            
+                        // define some parameters and arrays
+            unsigned char test_msg[MSG_LEN];
+            unsigned char data[DATA_LEN] = {};
+            unsigned char msg[MSG_LEN];
+            float xAcc, yAcc, zAcc, xGyro, yGyro, zGyro;
+            
+            
+            unsigned char status = imu_test();
+            sprintf(test_msg, "Test address = %d  ", status);
+            LCD_drawString(1, 1, test_msg, WHITE, BLACK);
+
+            xAcc = getXAcc(dataReg8);
+            yAcc = getYAcc(dataReg8);
+            zAcc = getZAcc(dataReg8);
+            xGyro = getXGyro(dataReg8);
+            yGyro = getYGyro(dataReg8);
+            zGyro = getZGyro(dataReg8);
+
+            sprintf(msg, "xAcc = %1.3f  ", xAcc);
+            LCD_drawString(1, 10, msg, WHITE, BLACK);
+            sprintf(msg, "yAcc = %1.3f  ", yAcc);
+            LCD_drawString(1, 20, msg, WHITE, BLACK);
+
+            // draw static bar
+            LCD_drawStaticBar(10, 80, 3, 108, BLUE);
+            LCD_drawStaticBar(64, 30, 110, 3, BLUE);
+
+            // draw dynamic bar
+            LCD_drawDynamicBarX(64, 80, 3, xAcc, WHITE, BLUE);
+            LCD_drawDynamicBarY(64, 80, yAcc, 3, WHITE, BLUE);
+
+            // LED blink
+            LATAbits.LATA4 =! LATAbits.LATA4;
+            
+            
+            RAW = xAcc;
             data_buffer[count%10] = RAW;
             
             // IIR filter
@@ -448,12 +484,7 @@ void APP_Tasks(void) {
             
             /* 0509*/
             
-            
-            // define some parameters and arrays
-            unsigned char test_msg[MSG_LEN];
-            unsigned char data[DATA_LEN] = {};
-            unsigned char msg[MSG_LEN];
-            float xAcc, yAcc, zAcc, xGyro, yGyro, zGyro;
+           
 
             if (appData.isReadComplete) {
                 if(appData.readBuffer[0]=='r'){
