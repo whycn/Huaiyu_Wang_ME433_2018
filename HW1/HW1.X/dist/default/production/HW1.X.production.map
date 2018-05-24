@@ -958,14 +958,14 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000      0xcef
+.debug_info     0x00000000      0xcd5
  *(.debug_info .gnu.linkonce.wi.*)
- .debug_info    0x00000000      0x87d build/default/production/main.o
- .debug_info    0x0000087d       0xf5 e:/software/pic32/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-bootstrap-exception-handler.o)
- .debug_info    0x00000972       0xce e:/software/pic32/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-on-reset.o)
- .debug_info    0x00000a40       0xd6 e:/software/pic32/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-on-bootstrap.o)
- .debug_info    0x00000b16       0xf1 e:/software/pic32/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-general-exception-handler.o)
- .debug_info    0x00000c07       0xe8 e:/software/pic32/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(defaultinterrupt.o)
+ .debug_info    0x00000000      0x863 build/default/production/main.o
+ .debug_info    0x00000863       0xf5 e:/software/pic32/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-bootstrap-exception-handler.o)
+ .debug_info    0x00000958       0xce e:/software/pic32/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-on-reset.o)
+ .debug_info    0x00000a26       0xd6 e:/software/pic32/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-on-bootstrap.o)
+ .debug_info    0x00000afc       0xf1 e:/software/pic32/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-general-exception-handler.o)
+ .debug_info    0x00000bed       0xe8 e:/software/pic32/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(defaultinterrupt.o)
 
 .debug_abbrev   0x00000000      0x16e
  *(.debug_abbrev)
@@ -976,14 +976,14 @@ END GROUP
  .debug_abbrev  0x0000011e       0x28 e:/software/pic32/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-general-exception-handler.o)
  .debug_abbrev  0x00000146       0x28 e:/software/pic32/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(defaultinterrupt.o)
 
-.debug_line     0x00000000      0x3e7
+.debug_line     0x00000000      0x3cd
  *(.debug_line)
- .debug_line    0x00000000       0xc9 build/default/production/main.o
- .debug_line    0x000000c9       0xa7 e:/software/pic32/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-bootstrap-exception-handler.o)
- .debug_line    0x00000170       0x94 e:/software/pic32/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-on-reset.o)
- .debug_line    0x00000204       0x98 e:/software/pic32/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-on-bootstrap.o)
- .debug_line    0x0000029c       0xa5 e:/software/pic32/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-general-exception-handler.o)
- .debug_line    0x00000341       0xa6 e:/software/pic32/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(defaultinterrupt.o)
+ .debug_line    0x00000000       0xaf build/default/production/main.o
+ .debug_line    0x000000af       0xa7 e:/software/pic32/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-bootstrap-exception-handler.o)
+ .debug_line    0x00000156       0x94 e:/software/pic32/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-on-reset.o)
+ .debug_line    0x000001ea       0x98 e:/software/pic32/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-on-bootstrap.o)
+ .debug_line    0x00000282       0xa5 e:/software/pic32/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(default-general-exception-handler.o)
+ .debug_line    0x00000327       0xa6 e:/software/pic32/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib\libpic32.a(defaultinterrupt.o)
 
 .debug_frame    0x00000000       0xe4
  *(.debug_frame)
